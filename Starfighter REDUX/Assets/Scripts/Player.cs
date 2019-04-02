@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         SetupMoveBoundaries();
+        StartCoroutine(MyCoroutine());
     }
 
     // Update is called once per frame
@@ -52,5 +53,12 @@ public class Player : MonoBehaviour
             GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
         }
+    }
+
+    IEnumerator MyCoroutine()
+    {
+        Debug.Log("Hello World!");
+        yield return new WaitForSeconds(3);
+        Debug.Log("Goodbye Cruel World!!");
     }
 }
