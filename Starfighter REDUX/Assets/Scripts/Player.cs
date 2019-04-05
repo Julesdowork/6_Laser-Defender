@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    const int ENEMY_PROJECTILE_LAYER = 9;
+
+    [Header("Player Health")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float boundsPadding = .5f;
+    [SerializeField] int health = 200;
+
+    [Header("Projectile")]
     [SerializeField] GameObject laserPrefab;
     [SerializeField] float projectileSpeed = 20f;
     [SerializeField] float projectileFiringPeriod = 0.1f;
@@ -26,6 +32,15 @@ public class Player : MonoBehaviour
     {
         Move();
         Fire();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == ENEMY_PROJECTILE_LAYER)
+        {
+            DamageDealer damageDealer = other.GetComponent<DamageDealer>();
+            ProcessHit(damageDealer);
+        }
     }
 
     private void SetupMoveBoundaries()
@@ -66,6 +81,15 @@ public class Player : MonoBehaviour
             GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
             yield return new WaitForSeconds(projectileFiringPeriod);
+        }
+    }
+
+    private void ProcessHit(DamageDealer damageDealer)
+    {
+        health -= damageDealer.GetDamage();
+        if (health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

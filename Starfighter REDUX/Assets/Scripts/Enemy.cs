@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject projectile;
     [SerializeField] float projectileSpeed = 10f;
 
+    const int PLAYER_PROJECTILE_LAYER = 8;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player Laser"))
+        if (other.gameObject.layer == PLAYER_PROJECTILE_LAYER)
         {
             DamageDealer damageDealer = other.GetComponent<DamageDealer>();
             ProcessHit(damageDealer);
