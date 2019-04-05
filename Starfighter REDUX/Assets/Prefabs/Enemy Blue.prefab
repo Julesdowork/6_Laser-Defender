@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2617252614688582028}
   - component: {fileID: 3582706118944289603}
   - component: {fileID: 5673891674686515649}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,6 +107,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 500
+  shotCounter: 0
+  minTimeBetweenShots: 0.2
+  maxTimeBetweenShots: 3
+  projectile: {fileID: 0}
+  projectileSpeed: 10
 --- !u!58 &5673891674686515649
 CircleCollider2D:
   m_ObjectHideFlags: 0
