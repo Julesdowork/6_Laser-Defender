@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Level : MonoBehaviour
 {
     Level level;
+    [SerializeField] float delayInSecs = 3f;
 
     void Awake()
     {
@@ -32,6 +33,12 @@ public class Level : MonoBehaviour
     
     public void LoadGameOver()
     {
+        StartCoroutine(WaitAndLoad());
+    }
+
+    IEnumerator WaitAndLoad()
+    {
+        yield return new WaitForSeconds(delayInSecs);
         SceneManager.LoadScene("Game Over");
     }
 

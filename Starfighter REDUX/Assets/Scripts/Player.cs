@@ -24,14 +24,12 @@ public class Player : MonoBehaviour
     [SerializeField] [Range(0,1)] float hitSoundVolume = 0.75f;
     [SerializeField] AudioClip deathSound;
     [SerializeField] [Range(0,1)] float deathSoundVolume = 0.9f;
-    Level level;
     float waitBeforeGameOver = 3f;
 
     // Start is called before the first frame update
     void Start()
     {
         SetupMoveBoundaries();
-        level = FindObjectOfType<Level>();
     }
 
     // Update is called once per frame
@@ -108,12 +106,6 @@ public class Player : MonoBehaviour
     {
         Destroy(gameObject);
         AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, deathSoundVolume);
-        StartCoroutine(LoadGameOver());
-    }
-
-    IEnumerator LoadGameOver()
-    {
-        yield return new WaitForSeconds(waitBeforeGameOver);
-        level.LoadGameOver();
+        FindObjectOfType<Level>().LoadGameOver();
     }
 }
