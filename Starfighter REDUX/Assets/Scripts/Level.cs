@@ -5,19 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class Level : MonoBehaviour
 {
-    Level level;
     [SerializeField] float delayInSecs = 3f;
 
     void Awake()
     {
-        if (level != this)
+        SetupSingleton();
+    }
+
+    private void SetupSingleton()
+    {
+        if (FindObjectsOfType(GetType()).Length > 1)
         {
-            level = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
     }
 

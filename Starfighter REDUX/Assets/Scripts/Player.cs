@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     [SerializeField] [Range(0,1)] float hitSoundVolume = 0.75f;
     [SerializeField] AudioClip deathSound;
     [SerializeField] [Range(0,1)] float deathSoundVolume = 0.9f;
-    float waitBeforeGameOver = 3f;
 
     // Start is called before the first frame update
     void Start()
