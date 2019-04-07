@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("Player Health")]
+    [Header("Player Stats")]
+    [SerializeField] int health = 200;
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float boundsPadding = .5f;
-    [SerializeField] int health = 200;
+    float xMin;
+    float xMax;
+    float yMin;
+    float yMax;
 
     [Header("Projectile")]
     [SerializeField] GameObject laserPrefab;
     [SerializeField] float projectileSpeed = 20f;
     [SerializeField] float projectileFiringPeriod = 0.1f;
-    float xMin;
-    float xMax;
-    float yMin;
-    float yMax;
+
     Coroutine firingCoroutine;
+
+    [Header("Audio")]
     [SerializeField] AudioClip shootSound;
     [SerializeField] [Range(0,1)] float shootSoundVolume = 0.25f;
     [SerializeField] AudioClip hitSound;
@@ -106,5 +109,10 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
         AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, deathSoundVolume);
         FindObjectOfType<Level>().LoadGameOver();
+    }
+
+    public int GetHealth()
+    {
+        return health;
     }
 }
