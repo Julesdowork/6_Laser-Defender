@@ -7,23 +7,6 @@ public class Level : MonoBehaviour
 {
     [SerializeField] float delayInSecs = 3f;
 
-    void Awake()
-    {
-        SetupSingleton();
-    }
-
-    private void SetupSingleton()
-    {
-        if (FindObjectsOfType(GetType()).Length > 1)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
     public void LoadStartMenu()
     {
         SceneManager.LoadScene(0);
@@ -32,6 +15,7 @@ public class Level : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene("Game");
+        FindObjectOfType<GameSession>().ResetGame();
     }
     
     public void LoadGameOver()
